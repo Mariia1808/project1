@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import { Pagination } from 'react-bootstrap';
 import { Context } from '..';
+import "../css.css"
 
 
 const Pages = observer(() => {

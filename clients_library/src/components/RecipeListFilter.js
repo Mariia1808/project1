@@ -16,7 +16,7 @@ const RecipeListFilter = observer(({Ftime, Fcomplex, Fkcal}) => {
         
         <Row className="d-flex">
             {Ftime!=''? Fkcal!=''? Fcomplex!=''?
-                <Row className="d-flex">{recipe.recipes.map(recipe =>{
+                <Row className="d-flex">{recipe.recipes.map(recipe =>{ 
                 if((Fkcal>parseInt(recipe.kcal))&&(Ftime==parseInt(recipe.time))&&(Fcomplex==recipe.complex.toString()))
                     return <RecipeItem key={recipe.id} recipe={recipe}/>})}</Row>
                :

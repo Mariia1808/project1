@@ -10,10 +10,11 @@ const App = observer(() => {
   
     return (
       <BrowserRouter>
+          <div>
           <NavBar/>
           <AppRouter />
-          
-          <Footer/>
+          <Footer/> 
+          </div>
       </BrowserRouter>
     );
 });

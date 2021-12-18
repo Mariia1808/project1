@@ -11,7 +11,7 @@ import { deleteProportion, fetchProducts, fetchProportions } from '../http/produ
 
 const DeleteAndUpdateProportion = ({show, onHide}) => {
     
-    const [Prop, SetProp] = useState('')
+    //const [Prop, SetProp] = useState('')
     const [recipeId, setrecipeId] = useState('')
     const {user, recipe}=useContext(Context)
     
@@ -21,8 +21,9 @@ const DeleteAndUpdateProportion = ({show, onHide}) => {
         fetchProportions().then(data => recipe.setProportions(data))
     },[])
 
-    const delProportion = () =>{
-        deleteProportion(Prop).then()
+    const delProportion = (Prop) =>{
+        deleteProportion(Prop).then(data => onHide())
+        fetchProportions(data => recipe.setProportions(data)).then()
     }
     
   
@@ -60,7 +61,8 @@ const DeleteAndUpdateProportion = ({show, onHide}) => {
                     if (parseInt(recipeId) === parseInt(proportion.recipeId))
                     return <p>{recipe.products.map(product => {
                         if (product.id === proportion.productId)
-                        return <Form.Check className='lol2' type="radio" value={proportion.id} key={proportion.id} onChange={(e) => SetProp(e.target.value)} label={`${product.name}: ${proportion.kolvo} грамм`}/> 
+                        return <><text className='lol2' > {product.name}:{proportion.kolvo} грамм</text>
+                        <Button className='lol4' value={proportion.id} key={proportion.id} onClick={(e) => delProportion(e.target.value)}>Удалить</Button><hr/></>
                             }
                         )}</p>
                     }
@@ -71,7 +73,6 @@ const DeleteAndUpdateProportion = ({show, onHide}) => {
         </Modal.Body>
         <Modal.Footer>
             <Button className="recbut" onClick={onHide}>Закрыть</Button>
-            <Button className="recbut" onClick={delProportion}>Удалить</Button>
         </Modal.Footer>
         </Container></Modal>
     );

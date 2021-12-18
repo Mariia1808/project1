@@ -15,7 +15,7 @@ const CreateType= ({show, onHide}) => {
     
 
     const Create = () =>{
-            createType({name: name}).then()
+            createType({name: name}).then(data => onHide())
         }
 
 

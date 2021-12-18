@@ -2,7 +2,7 @@ body{
     background: rgb(248, 203, 135);
     margin-bottom: 170px;
 }
-.navbar{
+.navbar0{
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     height: 193px;
     width: 1202px;
@@ -14,6 +14,15 @@ body{
     /*box-shadow: 0px 8px 40px #F8CB87;*/
     border-radius: 98px;
     margin-left: 200px;
+}
+#u{
+    height: 20px;
+    font-family: Nexa Script;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000;
 }
 .q{
     width: 400px;
@@ -199,6 +208,9 @@ box-shadow: 20px 0px 10px 10px rgba(0, 0, 0, 0.25);
 border-radius: 100px;
 max-width: 1197px;
 padding-top: 250px;
+display: flex;
+flex-direction: column;
+
 }
 #p1{
     margin-left: 90px;
@@ -262,6 +274,16 @@ font-weight: bold;
 font-size: 15px;
 line-height: 22px;
 color: #151515;
+}
+.d1{
+    justify-content: center;
+}
+.r{
+    font-family: Nexa Script;
+    font-style: normal;
+    /* font-weight: bold; */
+    font-size: 35px;
+    margin-top: -13px;
 }
 
 .product{
@@ -366,6 +388,9 @@ color: #151515;
     flex: none;
     padding-bottom: 50px;
     order: 1;
+    white-space: nowrap; /* Текст не переносится */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+    text-overflow: ellipsis;
     flex-grow: 0;
     
 }
@@ -609,12 +634,12 @@ margin: 8px 0px;
     height: 50px;
 }
 .raterec1{
-    font-size: 15px;
+    font-size: 20px;
     font-family: Poppins;
     margin-bottom: 20px;
     background-image:url("./assets/rate3.png");
     width: 30px;
-    padding-top: 8px;
+    margin-left: 15px;
     background-repeat: no-repeat;
     text-align: center;
     height: 30px;
@@ -648,11 +673,11 @@ margin: 8px 0px;
 }
 .photo{
     position: absolute;
-width: 450px;
-height: 400px;
-margin-left: 80px;
-border-radius: 80px;
-margin-top: 40px;
+    width: 450px;
+    height: 400px;
+    margin-left: 80px;
+    border-radius: 80px;
+    margin-top: 20px;
 }
 .info{
     margin-left: 580px;
@@ -689,8 +714,9 @@ margin-top: 40px;
     font-family: Poppins;
 }
 .step{
-    margin-top: -600px;
+    margin-top: 450px;
     margin-left: 80px;
+    position: absolute;
     width: 450px;
 }
 .steps{
@@ -735,7 +761,58 @@ line-height: 20px;
 letter-spacing: 0.25px;
 color: rgba(0, 0, 0, 0.87);
 border: 0.5px solid #979797;
-margin-left: 10px;
+margin-left: 20px;
+margin-bottom: 20px;
+}
+.lol4{
+    background: #F8CB87;
+border-radius: 16px;
+font-family: Nexa Script;
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 20px;
+letter-spacing: 0.25px;
+color: rgba(0, 0, 0, 0.87);
+border: 0.5px solid #979797;
+margin-left: 20px;
+}
+.lol5 {
+    background: #F8CB87;
+    border-radius: 16px;
+    font-family: Nexa Script;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    width: 40px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.87);
+    border: 0.5px solid #979797;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.lol5::marker {
+    background: #F8CB87;
+    border-radius: 16px;
+    font-family: Nexa Script;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    width: 40px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    color: rgba(0, 0, 0, 0.87);
+    border: 0.5px solid #979797;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.username{
+    font-family: Nexa Script;
+    text-align: center;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 60px;
 }
 .lol1{
     background: #F8CB87;
@@ -746,7 +823,7 @@ margin-left: 10px;
     font-weight: 300;
     font-size: 20px;
     width: 350px;
-    height: 30px;
+    height: 65px;
     margin-left: 35px;
     line-height: 20px;
     letter-spacing: 0.25px;
@@ -754,8 +831,8 @@ margin-left: 10px;
     border: 0.5px solid #979797;
 }
 .lol2{
-    background: #F8CB87;
-    border-radius: 16px;
+       /* background: #F8CB87; */
+    /* border-radius: 16px; */
     font-family: Nexa Script;
     /* text-align: center; */
     font-style: normal;
@@ -764,6 +841,34 @@ margin-left: 10px;
     /* width: 350px; */
     height: -webkit-fill-available;
     /* margin-left: 35px; */
+    line-height: 20px;
+    margin-bottom: 15px;
+    /* letter-spacing: 0.25px; */
+    color: rgba(0, 0, 0, 0.87);
+    /* border: 0.5px solid #979797;*/
+}
+.d{
+    text-align: center;
+}
+.vibor{
+    font-family: Nexa Script;
+    text-align: center;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    
+}
+.lol3{
+    background: #F8CB87;
+    border-radius: 16px;
+    font-family: Nexa Script;
+    /* text-align: center; */
+    font-style: normal;
+    font-weight: 300;
+    font-size: 26px;
+    /* width: 350px; */
+    height: -webkit-fill-available;
+    margin-left: 35px;
     line-height: 20px;
     margin-bottom: 10px;
     letter-spacing: 0.25px;
@@ -819,8 +924,24 @@ margin-left: 10px;
     background-image: url("./assets/rate2.png");
     background-size: 30px;
 }
-
-
+.rates0{
+    background-image: url("./assets/disrate.png");
+    background-color: white;
+    border-color: white;
+    width: 33px;
+    height: 33px;
+}
+.footer{
+    background-image: url("./assets/vk.png");
+    background-color: #F8CB87;
+    border-color: #F8CB87;
+    width: 33px;
+    height: 33px;
+}
+.ops{
+    width: 400px;
+    margin-top: -70px;
+}
 .export{
     background: #F8CB87;
     border-radius: 16px;

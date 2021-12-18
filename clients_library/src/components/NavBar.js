@@ -25,7 +25,7 @@ const NavBar = observer(() => {
 
     return (
         
-        <Navbar variant="dark" className="navbar">
+        <Navbar variant="dark" className="navbar0">
             <Container className="d-flex justify-content-center align-items-center">
             <Nav className="ml-auto">
                 <Button className="main" id="d1" variant={"outline-light"} onClick={() => history.push(MAIN_ROUTE)} >Главная</Button>

@@ -3,6 +3,7 @@ import {makeAutoObservable} from "mobx";
 export default class RateStore{
     constructor() {
         this._user = {}
+        this._rate=[]
         this._recipes = []
         this._ratings=[]
 
@@ -19,7 +20,12 @@ export default class RateStore{
     setRatings(ratings){
         this._ratings = ratings
     }
-   
+    setRate(rate){
+        this._rate = rate
+    }
+    get rate(){
+        return this._rate
+    }
     get ratings(){
         return this._ratings
     }

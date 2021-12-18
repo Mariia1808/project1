@@ -3,11 +3,13 @@ import {$authHost, $host} from "./index";
 
 export const fetchProducts = async () => {
     const {data} = await $host.get('api/product/')
+    console.log(data)
     return data
 }
 
 export const fetchProportions = async () => {
     const {data} = await $host.get('api/proportion/')
+    console.log(data)
     return data
 }
 export const createProportion = async (proportion) =>{

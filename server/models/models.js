@@ -37,6 +37,7 @@ const Recipe = sequelize.define('recipe', {
     protein: {type: DataTypes.INTEGER, allowNull: false},
     fat: {type: DataTypes.INTEGER, allowNull: false},
     carb: {type: DataTypes.INTEGER, allowNull: false},
+    rate: {type: DataTypes.REAL, allowNull: false},
 })
 
 const Proportion = sequelize.define('proportion', {

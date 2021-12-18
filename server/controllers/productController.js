@@ -19,13 +19,6 @@ class ProductController {
         )
         return res.json(products)
     }
-    async delete(req, res){
-        const {id} = req.params
-        const products = await product.destroy(
-            {where: {id}},
-        )
-        return res.json(products)
-    }
 }
 
 module.exports = new ProductController()

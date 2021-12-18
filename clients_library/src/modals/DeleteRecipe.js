@@ -6,6 +6,7 @@ import {Context} from "../index";
 import '../css.css';
 import jwt_decode from "jwt-decode";
 import { deleteRecipe } from '../http/recipeAPI';
+import { fetchRecipes } from '../http/userAPI';
 
 
 
@@ -13,12 +14,10 @@ const DeleteRecipe= ({show, onHide}) => {
     const storedToken = localStorage.getItem("token");
     let decodedData = jwt_decode(storedToken);
     const {user}=useContext(Context)
-    const [recipeId, setRecipeId] = useState('')
-
-    const delRecipe = () =>{
-        deleteRecipe(recipeId).then()
-        onHide=true
-
+    
+    const delRecipe = (recipeId) =>{
+        deleteRecipe(recipeId).then(data => onHide())
+        fetchRecipes(data => user.setRecipes(data)).then()
     }
 
     return (
@@ -40,7 +39,8 @@ const DeleteRecipe= ({show, onHide}) => {
             
                 {user.recipes.map(recipe =>{
                 if(decodedData.id === parseInt(recipe.userId))
-                return <Form.Check className='lol2' type="radio" value={recipe.id} onChange={(e) => setRecipeId(e.target.value)} label={`${recipe.id}  ${recipe.name}`}/> 
+                return <><text className='lol2'>{recipe.name}</text>
+                <Button className='lol4' value={recipe.id} onClick={(e) => delRecipe(e.target.value)}>Удалить</Button><hr/></>
                     })}
                    </Col>
                 
@@ -49,7 +49,6 @@ const DeleteRecipe= ({show, onHide}) => {
         </Modal.Body>
         <Modal.Footer>
             <Button className="recbut" onClick={onHide}>Закрыть</Button>
-            <Button className="recbut" onClick={delRecipe}>Удалить</Button>
         </Modal.Footer>
         </Container></Modal>
     );

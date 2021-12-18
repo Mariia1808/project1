@@ -4,7 +4,8 @@ import { Modal } from 'react-bootstrap';
 import {Context} from "../index";
 import jwt_decode from "jwt-decode";
 import '../css.css';
-import { createRecipe } from '../http/recipeAPI';
+import { createRecipe, fetchRecipes } from '../http/recipeAPI';
+
 
 
 
@@ -51,7 +52,8 @@ const CreateRecipe = ({show, onHide}) => {
         formData.append('userId', parseInt(decodedData.id))
         formData.append('info', JSON.stringify(info))
         // formData.append('info', JSON.stringify(info))
-        createRecipe(formData).then()
+        createRecipe(formData).then(data => onHide())
+        fetchRecipes(data => recipe.setRecipes(data)).then()
         return setName(''), setType(''),setComplex(''), setTime(''),
         setFile(null),setProfile_mini(''),setProfile(''), setKcal(''),
         setProtein(''), setCarb(''), setFat('')
@@ -166,7 +168,7 @@ const CreateRecipe = ({show, onHide}) => {
                                 <Form.Control
                                     value={i.kolvo}
                                     onChange={(e) => changeInfo('kolvo', e.target.value, i.number)}
-                                    placeholder="Введите описание свойства"
+                                    placeholder="Введите количество"
                                 />
                             </Col>
                             <Col md={4}>

@@ -8,7 +8,7 @@ import {createProportion, fetchProducts, fetchProportions } from '../http/produc
 
 
 
-const CreateProportion = ({show, onHide}) => {
+const UpdateProportion = ({show, onHide}) => {
     
     
     const [kolvo, setKolvo] = useState('')
@@ -28,9 +28,9 @@ const CreateProportion = ({show, onHide}) => {
         formData.append('kolvo', parseInt(kolvo))
         formData.append('recipeId', parseInt(recipeId))
         formData.append('productId', parseInt(productId))
-        createProportion(formData)
-        fetchProportions().then(data=>recipe.setProportions(data))
-        fetchProducts().then(data => recipe.setProducts(data))
+        createProportion(formData).then(data => onHide())
+        fetchProportions(data=>recipe.setProportions(data)).then()
+        fetchProducts(data => recipe.setProducts(data)).then()
         return setKolvo('')
     }
     
@@ -69,9 +69,10 @@ const CreateProportion = ({show, onHide}) => {
                     return <p className="kolvo"  value={proportion.id}>
                     {recipe.products.map(product => {
                         if (product.id === proportion.productId)
-                        return <div className='lol1'> <text className="prodtext" value={product.id}>{product.name}:&emsp;&emsp;&emsp;&emsp; {proportion.kolvo} грамм</text> 
-                        &emsp;&emsp;&emsp;&emsp;<hr/>
-                        </div>
+                        return <div className='lol1'> 
+                        <Col className='md-4'><text className="prodtext" value={product.id}>{product.name}:</text></Col>
+                        <Col className='md-4'><Form.Control value={proportion.kolvo}/> </Col>
+                        <hr/> </div>
                         
                             }
                         )}
@@ -81,26 +82,16 @@ const CreateProportion = ({show, onHide}) => {
                     }
                 )}
 
-
-                <Col md={4}>
-                    <Form.Control as="select" className='q' value={productId} onChange={(e) => setproductId(e.target.value)} defaultValue="Продукт...">
-                        <option>Выберите продукт</option>
-                    {recipe.products.map(product =>
-                        <option value={product.id}>{product.name}</option> 
-                        )}
-                    </Form.Control></Col>
-                  
-                    <Col md={4}><Form.Control className="mt-3" className='q' value={kolvo} onChange={e => setKolvo(e.target.value)} placeholder="Введите количество в граммах"/></Col>
-
+                
                
             </Form>
         </Modal.Body>
         <Modal.Footer>
             <Button className="recbut" onClick={onHide}>Закрыть</Button>
-            <Button className="recbut" onClick={addProportion}>Добавить</Button>
+            <Button className="recbut" onClick={addProportion}>Обновить</Button>
         </Modal.Footer>
         </Container></Modal>
     );
   }
   
-export default CreateProportion;
+export default UpdateProportion;

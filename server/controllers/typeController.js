@@ -19,16 +19,11 @@ class TypeController {
         return res.json(types)
     }
     async update(req, res, next){
-        try{
             console.log(req.params)
             const {id} = req.params
             let {name} = req.body
             const type = await ( await (Type.findOne({where: {id}}))).update({name:name})
             return res.json({type})
-            }
-            catch (e){
-                next(ApiError.badRequest(e.message))
-            }
         }
     async delete(req, res){
         const {id} = req.params

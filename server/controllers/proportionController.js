@@ -10,20 +10,26 @@ class ProportionController {
     }
     async getAll(req, res){
         const proportions = await Proportion.findAll()
+        //console.log(proportions)
         return res.json(proportions)
     }
     async getOne(req, res){
         const {id} = req.params
-        const proportions = await Proportion.findOne(
-            {where:{id}}
-        )
+        const proportions = await Proportion.findOne({where:{id}})
+        console.log(proportions)
         return res.json(proportions)
     }
     async delete(req, res){
         const {id} = req.params
-        const proportions = await Proportion.destroy(
-            {where: {id}},
-        )
+        const proportions = await Proportion.destroy({where: {id}})
+        console.log(proportions)
+        return res.json(proportions)
+    }
+    async update(req, res){
+        const {id} = req.params
+        const {kolvo} = req.body
+        const proportions = await Proportion.update({kolvo: kolvo}, {where: {id}})
+        console.log(proportions)
         return res.json(proportions)
     }
 }

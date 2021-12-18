@@ -1,4 +1,4 @@
-const {Cook} = require('../models/models')
+const {Cook, Recipe} = require('../models/models')
 const ApiError = require('../error/ApiError');
 
 class CookController {
@@ -20,11 +20,25 @@ class CookController {
         return res.json(cooks)
     }
     async delete(req, res){
-        const {id} = req.params
+        const {recipeId, userId} = req.params
         const cooks = await Cook.destroy(
-            {where: {id}},
+            {where: {recipeId: recipeId, userId: userId}},
         )
+        console.log(cooks)
         return res.json(cooks)
+    }
+    async getUserCook(req, res, next){
+        const {id}= req.params
+        const all_rating = await Cook.findAll({where:{ userId: id}})
+        const new_rating= []
+        for (const el_all_rating of all_rating)
+        {
+            const {recipeId} = el_all_rating
+            const one_recipe = await Recipe.findOne({where:{id: recipeId}})
+            new_rating.push(one_recipe)
+        }
+        return res.json(new_rating)
+
     }
 }
 module.exports = new CookController()

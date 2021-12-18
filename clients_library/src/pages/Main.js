@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button, Form, Navbar} from "react-bootstrap";
 import "../css.css";
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import RecipeList from "../components/RecipeList";
 import { useHistory } from 'react-router-dom';
 import { observer } from "mobx-react-lite";
@@ -13,6 +13,10 @@ import RecipeListFilter from "../components/RecipeListFilter";
 import ProductBar from "../components/ProductBar";
 import Nouislider from "nouislider-react";
 import "nouislider/distribute/nouislider.css";
+import { Context } from "..";
+import { fetchRecipes, fetchTypes } from "../http/recipeAPI";
+import { fetchProducts } from "../http/productAPI";
+import RecipeListPopular from "../components/RecipeListPopular";
 
 const Main = observer(() => {
     const history = useHistory()
@@ -22,9 +26,23 @@ const Main = observer(() => {
     const [but, setBut] = useState(false)
 
     const reset = () =>{
-        return setBut(false), setComplex(''), setTime(''),setKcal('')
+        return setBut(false), setComplex(''), setTime(''),setKcal(''),recipe.setSelectedType('')
     }
-
+    const {recipe}=useContext(Context)
+    useEffect(()=>{
+            fetchTypes().then(data=>recipe.setTypes(data))
+            fetchProducts().then(data=>recipe.setProducts(data))
+            fetchRecipes(null, null, 1, null).then(data=> {
+                    recipe.setRecipe(data.rows)
+                    recipe.setTotalCount(data.count)
+            })
+    },[])
+    useEffect(()=>{
+            fetchRecipes(recipe.selectedType.id, recipe.page, recipe.limit, 3).then(data=> {
+                    recipe.setRecipe(data.rows)
+                    recipe.setTotalCount(data.count)
+            })
+    },[recipe.page, recipe.selectedType])
     // useEffect(()=>{
     //     fetchRecipes().then(data=> recipe.setRecipe(data.rows))
     // },[])
@@ -82,7 +100,7 @@ const Main = observer(() => {
                 <h2 className="textpop">Результаты поиска</h2>
                 <Row className="rows1"><Col md={9}>
             <Row className="d-flex">
-            
+                
                 <RecipeListFilter Ftime={time} Fcomplex={complex} Fkcal={kcal}/>
                
             </Row>
@@ -93,10 +111,8 @@ const Main = observer(() => {
             <h2 className="textpop">Популярные рецепты</h2>
             <Row className="rows"><Col md={9}>
             <Row className="d-flex">
-        
-            <RecipeList/>
+            <RecipeListPopular filter=''/>
             
-            <Button className="morerec" onClick={() => history.push(RECIPES_ROUTE)}>Больше рецептов</Button>
             </Row>
             </Col> </Row>
             </Container>

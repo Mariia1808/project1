@@ -21,7 +21,7 @@ const CreateProduct = ({show, onHide}) => {
         formData.append('protein', protein)
         formData.append('fat', fat)
         formData.append('carb', carb)
-        createProduct(formData).then()
+        createProduct(formData).then(data => onHide())
         return setName(''),setKcal(''),
         setProtein(''), setCarb(''), setFat('')
     }

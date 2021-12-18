@@ -37,6 +37,9 @@ export const publicRoutes = [
     {
         path:RECIPE_ROUTE + '/:id',
         Component: RecipePage
+    },{
+        path:RECIPE_ROUTE + '/:id/:userId',
+        Component: RecipePage
     },
     {
         path:REGISTRATION_ROUTE,

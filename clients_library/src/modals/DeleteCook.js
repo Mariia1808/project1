@@ -5,24 +5,27 @@ import { Modal } from 'react-bootstrap';
 import {Context} from "../index";
 import '../css.css';
 import jwt_decode from "jwt-decode";
-import { deleteFavorite, fetchFavorites, fetchUserFavorite } from '../http/favoriteAPI';
+import { fetchFavorites, fetchUserFavorite } from '../http/favoriteAPI';
 import { fetchFavRecipes } from '../http/recipeAPI';
+import { deleteCook, fetchUserCook } from '../http/cookAPI';
 
 
-const DeleteFavorite = ({show, onHide}) => {
+const DeleteCook = ({show, onHide}) => {
     
    
     const {favorite}=useContext(Context)
 
-    //const [recipeId, setRecipeId] = useState('')
+    const [recipeId, setRecipeId] = useState('')
     const storedToken = localStorage.getItem("token");
     let decodedData = jwt_decode(storedToken);
     useEffect(() => {
-        fetchUserFavorite(decodedData.id).then(data=>favorite.setFavorites(data))        
+        fetchUserCook(decodedData.id).then(data=>favorite.setCooks(data))        
     },[])
-    const delFav=(recipeId)=>{
-        deleteFavorite(recipeId, decodedData.id).then(data => onHide())
+
+    const delCo=(recipeId)=>{
+        deleteCook(recipeId, decodedData.id).then(data => onHide())
     }
+
     return (
         
         <Modal 
@@ -33,16 +36,16 @@ const DeleteFavorite = ({show, onHide}) => {
         <Container className="form">
         <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-                Удаление из избранного
+                Удаление из приготовленных
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form>
             <Col md={12}>
             
-            {favorite.favorites.map(recipe =>{
+            {favorite.cooks.map(recipe =>{
             return <><text className='lol2'>{recipe.name}</text>
-            <Button className='lol4' value={recipe.id} onClick={(e) => delFav(e.target.value)}>Удалить</Button><hr/></>
+            <Button className='lol4' value={recipe.id} onClick={(e) => delCo(e.target.value)}>Удалить</Button><hr/></>
                 })}
             </Col>               
             </Form>
@@ -55,4 +58,4 @@ const DeleteFavorite = ({show, onHide}) => {
     );
   }
   
-export default DeleteFavorite;
+export default DeleteCook;

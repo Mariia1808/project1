@@ -15,37 +15,7 @@ const Auth = observer(() => {
     const [loading, setLoading] = useState('Loading...');
   const [users, setUser] = useState(null);
  
-  const handleLoginSuccess = (response) => {
-    console.log("Login Success ", response);
-    setUser(response.profileObj);
-    user.setIsAuth(true)
-    setLoading();
-  }
- 
-  const handleLoginFailure = error => {
-    console.log("Login Failure ", error);
-    setLoading();
-  }
- 
-  const handleLogoutSuccess = (response) => {
-    console.log("Logout Success ", response);
-    setUser(null);
-  }
- 
-  const handleLogoutFailure = error => {
-    console.log("Logout Failure ", error);
-  }
- 
-  const handleRequest = () => {
-    setLoading("Loading...");
-  }
- 
-  const handleAutoLoadFinished = () => {
-    setLoading();
-    user.setIsAuth(false)
-  }
-
-
+  
     const history = useHistory()
     const location = useLocation()
     const {user} = useContext(Context)
@@ -74,6 +44,7 @@ const Auth = observer(() => {
                 console.log(data)
             } else {
                 data = await registration(name, email, password);
+                data = await login(email, password);
             }
             user.setUser(users)
             user.setIsAuth(true)
@@ -161,24 +132,6 @@ const Auth = observer(() => {
                     
                 </Form>
                 </Card><Card>
-                {users ? <div>
-                <div className="name">Welcome {users.name}!</div>
-                    <GoogleLogout
-                    clientId={clientId}
-                    onLogoutSuccess={handleLogoutSuccess}
-                    onFailure={handleLogoutFailure}
-                    />
-                    <pre>{JSON.stringify(users, null, 2)}</pre>
-                </div> :
-                <GoogleLogin
-                    clientId={clientId}
-                    buttonText={loading}
-                    onSuccess={handleLoginSuccess}
-                    onFailure={handleLoginFailure}
-                    onRequest={handleRequest}
-                    onAutoLoadFinished={handleAutoLoadFinished}
-                    isSignedIn={true}
-                />}
             </Card>
         </Container>
     );
